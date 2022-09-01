@@ -22,8 +22,8 @@
 <script lang="ts">
 import { computed, defineComponent, ref } from "vue";
 import Menubar from "primevue/menubar";
-import { MenuItem } from "primevue/menuitem";
 import { store } from "../store/store";
+import { MenuItem } from "primevue/menuitem";
 
 export default defineComponent({
   setup() {
@@ -33,6 +33,11 @@ export default defineComponent({
         label: "Iniciar session",
         class: "p-button-outlined p-button-info",
         to: "/login",
+      },
+      {
+        label: "Crear cuenta",
+        class: "p-button-outlined",
+        to: "/register",
       },
     ]);
 

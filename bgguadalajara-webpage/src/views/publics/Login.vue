@@ -125,6 +125,7 @@
         label="Yes"
         icon="pi pi-check"
         @click="RestartPassword"
+        :disabled="loading"
         class="p-button-text"
         autofocus
       />
@@ -178,6 +179,7 @@ export default defineComponent({
     };
 
     const RestartPassword = async () => {
+      loading.value = true;
       console.log(validator.isEmail(emailRestart.value));
       if (validator.isEmail(emailRestart.value)) {
         const { data, error } = await supabase.auth.api.resetPasswordForEmail(
@@ -200,6 +202,7 @@ export default defineComponent({
         });
         dgRestorePass.value = false;
       }
+      loading.value = false;
     };
 
     return {

@@ -1,7 +1,6 @@
 <template>
     <div>
-        <h1>404 Not Found</h1>
-        <router-link to="/">Volver al inicio</router-link>
+        <h1>Hola Mundo</h1>
     </div>
 </template>
 
@@ -9,7 +8,8 @@
 import { defineComponent } from 'vue'
 
 export default defineComponent({
-    setup () {       
+    setup () {
+        
 
         return {}
     }
