@@ -2,7 +2,7 @@
     <Toast />
     <Menubar :model="menuItems">
       <template #start>
-        <a href="/">
+        <a href="/app">
           <img alt="logo" src="img/BGIcon.png" height="40" class="mr-2" />
         </a>
       </template>
@@ -29,6 +29,7 @@
     setup() {
       const menuItems = ref<MenuItem[]>([
         { label: "Inicio", icon: "pi pi-home", to: "/" },
+        {label: "Perfil", to: {name: "profile"}},
         {
           label: "Cerrar session",
           class: "p-button-outlined p-button-info",

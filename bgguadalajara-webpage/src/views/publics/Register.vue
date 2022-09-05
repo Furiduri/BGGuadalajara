@@ -8,7 +8,7 @@
                 <div class="h-full w-full m-0 py-7 px-4" style="border-radius:53px; background: linear-gradient(180deg, var(--surface-50) 38.9%, var(--surface-0));">                    
                     <div class="w-full md:w-10 mx-auto">
                         <label for="email1" class="block text-900 text-xl font-medium mb-2">Correo</label>
-                        <InputText id="email1" v-model="email" type="text" class="w-full mb-3" placeholder="Correo" style="padding:1rem;" />
+                        <InputText id="email1" v-model="email" type="email" class="w-full mb-3" placeholder="Correo" style="padding:1rem;" aria-autocomplete="none" />
                 
                         <label
               for="password1"

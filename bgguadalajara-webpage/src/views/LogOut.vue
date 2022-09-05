@@ -10,13 +10,12 @@ import { useRouter } from 'vue-router';
 import { supabase } from '../supabase';
 
 export default defineComponent({
-    setup () {
+    async created() {
         const routers = useRouter();
-        supabase.auth.signOut().then( (res)=>{
-            routers.push("login");
-        }           
-        );
-
+        await supabase.auth.signOut();
+        routers.push("/");        
+    },
+    setup () {
         return {}
     }
 })

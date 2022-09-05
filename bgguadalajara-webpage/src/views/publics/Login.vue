@@ -1,4 +1,5 @@
 <template>
+<form @submit.prevent="LoginEmail">
   <div
     class="surface-0 flex align-items-center justify-content-center min-h-screen min-w-screen overflow-hidden"
   >
@@ -61,6 +62,7 @@
               class="w-full mb-3"
               inputClass="w-full"
               inputStyle="padding:1rem"
+              :feedback="false"
             ></Password>
 
             <div class="flex align-items-center justify-content-between mb-5">
@@ -82,7 +84,7 @@
             </div>
             <Button
               label="Ingresar"
-              @click="LoginEmail"
+              type="submit"
               class="w-full p-3 text-xl"
               :disabled="loading"
             ></Button>
@@ -91,6 +93,7 @@
       </div>
     </div>
   </div>
+</form>
   <Dialog
     header="Restablecer contraseña"
     v-model:visible="dgRestorePass"
@@ -140,6 +143,7 @@ import { store } from "../../store/store";
 import { supabase } from "../../supabase";
 import validator from "../../utils/validator";
 import { useToast } from "primevue/usetoast";
+import { useRouter } from "vue-router";
 
 export default defineComponent({
   setup() {
@@ -150,11 +154,12 @@ export default defineComponent({
     const dgRestorePass = ref<boolean>(false);
     const emailRestart = ref<string>("");
     const toast = useToast();
+    const router = useRouter();
     //Fuctions
     const LoginEmail = async () => {
       loading.value = true;
       if (validator.isEmail(email.value) && password.value.length > 6) {
-        const { user, session, error } = await supabase.auth.signIn({
+        const { user, error } = await supabase.auth.signIn({
           email: email.value,
           password: password.value,
         });
@@ -166,6 +171,7 @@ export default defineComponent({
             summary: "Ingreso exitoso!",
             detail: `Bienvenido ${"Usuario"}`,
           });
+          router.push({name: "dashboard"});
         } else {
           toast.add({
             life: 5000,
