@@ -1,21 +1,12 @@
 import { store } from "../store/store";
 import { supabase } from "../supabase";
+import Profile from './Models/Users';
 
-interface profile{
-  id: string,
-  username: string | null,
-  avatar_url: string | null,
-  Description: string | null,
-  BGGUserName: string | null,
-  FristName: string | null,
-  LastName: string | null,
-  SecondLastName: string | null,
-}
 
 const getUserInfo = async(id:string|null = null)=>{        
     
 let { data, error,status } = await supabase
-.from<profile>('profiles')
+.from<Profile>('profiles')
 .select('*')
 .eq("id", id != null ? id : store.user?.id)
 .single()

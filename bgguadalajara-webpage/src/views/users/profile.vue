@@ -1,6 +1,6 @@
 <template>
     <div>
-        <Avatar></Avatar>
+        <ProfileUser></ProfileUser>
     </div>
 </template>
 
@@ -8,7 +8,7 @@
 import { defineComponent, ref } from 'vue'
 import { useRoute } from 'vue-router';
 import { getUserInfo } from '../../services/UserServise';
-import Avatar from '../../components/Avatar.vue';
+import ProfileUser from '../../components/ProfileUser.vue';
 
 export default defineComponent({
     created(){
@@ -21,7 +21,7 @@ export default defineComponent({
     async mounted(){
         this.userInfo = await getUserInfo();
     },
-    components: { Avatar }
+    components: { ProfileUser }
 })
 </script>
 

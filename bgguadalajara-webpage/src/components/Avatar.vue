@@ -1,21 +1,77 @@
+<script setup>
+  import { ref, toRefs, watch } from 'vue'
+  import { supabase } from '../supabase'
+
+  const prop = defineProps(['path', 'sizes'])
+  const { path, sizes } = toRefs(prop)
+
+  const emit = defineEmits(['upload', 'update:path'])
+  const uploading = ref(false)
+  const src = ref('')
+  const files = ref()
+
+  const downloadImage = async () => {
+    try {
+      const { data, error } = await supabase.storage
+        .from('avatars')
+        .download(path.value)
+      if (error) throw error
+      src.value = URL.createObjectURL(data)
+    } catch (error) {
+      console.error('Error downloading image: ', error.message)
+    }
+  }
+
+  const uploadAvatar = async (evt) => {
+    files.value = evt.target.files
+    try {
+      uploading.value = true
+      if (!files.value || files.value.length === 0) {
+        throw new Error('You must select an image to upload.')
+      }
+
+      const file = files.value[0]
+      const fileExt = file.name.split('.').pop()
+      const filePath = `${Math.random()}.${fileExt}`
+
+      let { error: uploadError } = await supabase.storage
+        .from('avatars')
+        .upload(filePath, file)
+
+      if (uploadError) throw uploadError
+      emit('update:path', filePath)
+      emit('upload')
+    } catch (error) {
+      alert(error.message)
+    } finally {
+      uploading.value = false
+    }
+  }
+
+  watch(path, () => {
+    if (path.value) downloadImage()
+  })
+</script>
+
 <template>
   <div>
+    <label class="button primary block" for="single">
     <img
       v-if="src"
       :src="src"
       alt="Avatar"
-      class="avatar image"
-      :style="{ height: size, width: size }"
+      class="p-avatar p-avatar-circle"
+      :style="{ height: sizes + 'em', width: sizes + 'em' }"
     />
     <div
       v-else
-      class="avatar no-image"
-      :style="{ height: size, width: size }"
+      class="p-avatar p-avatar-circle"
+      :style="{ height: sizes + 'em', width: sizes + 'em' }"
     />
-
-    <div :style="{ width: size }">
-      <label class="button primary block" for="single">
-        {{ uploading ? "Uploading ..." : "Upload" }}
+    <br>
+       <span class="p-button p-button-info">
+         {{ uploading ? "Subiendo..." : "Cambiar imagen" }}
+       </span>
       </label>
       <input
         style="visibility: hidden; position: absolute"
@@ -26,77 +82,20 @@
         :disabled="uploading"
       />
     </div>
-  </div>
 </template>
 
-<script lang="ts">
-import { ref, toRefs, watch } from "vue"
-import { supabase } from "../supabase"
-
-export default {
-  props: {
-    path: String,
-  },
-  emits: ["upload", "update:path"],
-  setup(prop: any, { emit }: any) {
-    const { path } = toRefs(prop)
-    const size = ref("10em")
-    const uploading = ref(false)
-    const src = ref("")
-    const files = ref()
-
-    const downloadImage = async () => {
-      try {
-        const { data, error } = await supabase.storage
-          .from("avatars")
-          .download(path.value)
-        if (error) throw error
-        if(data != null)
-            src.value = URL.createObjectURL(data)
-      } catch (error:any) {
-        console.error("Error downloading image: ", error.message)
-      }
-    }
-
-    const uploadAvatar = async (evt:any) => {
-      files.value = evt.target.files
-      try {
-        uploading.value = true
-        if (!files.value || files.value.length === 0) {
-          throw new Error("You must select an image to upload.")
-        }
-
-        const file = files.value[0]
-        const fileExt = file.name.split(".").pop()
-        const fileName = `${Math.random()}.${fileExt}`
-        const filePath = `${fileName}`
-
-        let { error: uploadError } = await supabase.storage
-          .from("avatars")
-          .upload(filePath, file)
-
-        if (uploadError) throw uploadError
-        emit("update:path", filePath)
-        emit("upload")
-      } catch (error:any) {
-        alert(error.message)
-      } finally {
-        uploading.value = false
-      }
-    }
-
-    watch(path, () => {
-      if (path.value) downloadImage()
-    })
-
-    return {
-      size,
-      uploading,
-      src,
-      files,
-
-      uploadAvatar,
-    }
-  },
+<style scoped>
+  .avatar {
+  border-radius: var(--custom-border-radius);
+  overflow: hidden;
+  max-width: 100%;
 }
-</script>
+.avatar.image {
+  object-fit: cover;
+}
+.avatar.no-image {
+  background-color: #333;
+  border: 1px solid rgb(200, 200, 200);
+  border-radius: 5px;
+}
+</style>

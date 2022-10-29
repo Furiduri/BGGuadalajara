@@ -28,7 +28,7 @@
   export default defineComponent({
     setup() {
       const menuItems = ref<MenuItem[]>([
-        { label: "Inicio", icon: "pi pi-home", to: "/" },
+        { label: "Inicio", icon: "pi pi-home", to: {name:"dashboard"} },
         {label: "Perfil", to: {name: "profile"}},
         {
           label: "Cerrar session",

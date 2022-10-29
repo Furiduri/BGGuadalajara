@@ -23,7 +23,9 @@ const router = createRouter({
     const currentUser = supabase.auth.user();
     const requiresAuth = to.matched.some(record => record.meta.requiresAuth);
   
-    if(requiresAuth && !currentUser) next('/LogOut');
+    if(requiresAuth && !currentUser)
+      if(to.fullPath != "/") next('/LogOut');
+      else next({name:"Home"});
     else next();
   });
 

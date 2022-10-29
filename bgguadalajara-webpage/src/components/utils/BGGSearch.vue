@@ -23,7 +23,7 @@
 
 <script lang="ts">
 import { ref } from "@vue/reactivity";
-import { BggApi, IGameBoard } from "../../utils/BggApi";
+import { BggApi, IGameBoard } from "../../services/BggApi";
 import AutoComplete from "primevue/autocomplete";
 import { defineComponent } from 'vue'
 

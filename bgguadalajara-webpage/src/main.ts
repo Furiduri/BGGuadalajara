@@ -18,19 +18,25 @@ import Tooltip from 'primevue/tooltip';
 import CodeHighlight from './AppCodeHighlight';
 
 //Componnets
-import Button from 'primevue/button'
+import Button from 'primevue/button';
 import Checkbox from 'primevue/checkbox';
 import InputText from 'primevue/inputtext';
 import Password from 'primevue/password';
 import Dialog from 'primevue/dialog';
 import Message from 'primevue/message';
-import InlineMessage from 'primevue/inlinemessage'
-import Toast from 'primevue/Toast'
+import InlineMessage from 'primevue/inlinemessage';
+import Avatargroup from 'primevue/avatargroup';
+import Avatar from 'primevue/avatar';
+import Toast from 'primevue/Toast';
+import FileUpload from 'primevue/fileupload';
+import Divider from 'primevue/divider';
+import Carousel from 'primevue/carousel';
+import Card from 'primevue/card';
 
 
 const mainApp = createApp(App);
 mainApp.config.globalProperties.$appState = reactive({ theme: 'lara-light-teal', darkTheme: false });
-mainApp.use(PrimeVue, {ripple:true, inputStyle: 'outlined'});
+mainApp.use(PrimeVue, { ripple: true, inputStyle: 'outlined' });
 mainApp.use(router);
 mainApp.use(ConfirmationService);
 mainApp.use(ToastService);
@@ -41,13 +47,19 @@ mainApp.directive('badge', BadgeDirective);
 mainApp.directive('styleclass', StyleClass);
 
 //components
-mainApp.component("Button",Button);
-mainApp.component("Checkbox",Checkbox);
-mainApp.component("InputText",InputText);
-mainApp.component("Password",Password);
-mainApp.component("Dialog",Dialog);
-mainApp.component("Message",Message);
-mainApp.component("InlineMessage",InlineMessage);
-mainApp.component("Toast",Toast);
+mainApp.component("Button", Button);
+mainApp.component("Checkbox", Checkbox);
+mainApp.component("InputText", InputText);
+mainApp.component("Password", Password);
+mainApp.component("Dialog", Dialog);
+mainApp.component("Message", Message);
+mainApp.component("InlineMessage", InlineMessage);
+mainApp.component("Toast", Toast);
+mainApp.component("Avatar", Avatar);
+mainApp.component("Avatargroup", Avatargroup);
+mainApp.component("FileUpload", FileUpload);
+mainApp.component("Divider", Divider);
+mainApp.component("Carousel", Carousel);
+mainApp.component("Card", Card);
 
 mainApp.mount('#app');
