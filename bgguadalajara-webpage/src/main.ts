@@ -18,6 +18,7 @@ import Tooltip from 'primevue/tooltip';
 import CodeHighlight from './AppCodeHighlight';
 
 //Componnets
+import Panel  from 'primevue/panel';
 import Button from 'primevue/button';
 import Checkbox from 'primevue/checkbox';
 import InputText from 'primevue/inputtext';
@@ -32,6 +33,8 @@ import FileUpload from 'primevue/fileupload';
 import Divider from 'primevue/divider';
 import Carousel from 'primevue/carousel';
 import Card from 'primevue/card';
+import Dropdown from 'primevue/dropdown';
+import DynamicDialog from 'primevue/dynamicdialog';
 
 
 const mainApp = createApp(App);
@@ -61,5 +64,8 @@ mainApp.component("FileUpload", FileUpload);
 mainApp.component("Divider", Divider);
 mainApp.component("Carousel", Carousel);
 mainApp.component("Card", Card);
+mainApp.component("Dropdown", Dropdown);
+mainApp.component("DynamicDialog", DynamicDialog);
+mainApp.component("Panel ", Panel );
 
 mainApp.mount('#app');

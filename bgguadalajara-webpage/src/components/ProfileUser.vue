@@ -70,7 +70,7 @@ import { supabase } from "../supabase";
 import { store } from "../store/store";
 import { onMounted, ref } from "vue";
 import AvatarVue from "./Avatar.vue";
-import Profile from "../services/Models/Users";
+import Profile from "../services/Models/Profile";
 import { useToast } from "primevue/usetoast";
 export default {
   setup() {

@@ -14,7 +14,7 @@
       @close="CloseErrorMsg"
       >[{{ errorMsg?.status }} ] {{ errorMsg?.message }}</Message
     >
-    <div class="container-fluid">
+    <div class="container-fluid p-5">
       <router-view></router-view>
     </div>
   </template>
