@@ -35,6 +35,8 @@ import Carousel from 'primevue/carousel';
 import Card from 'primevue/card';
 import Dropdown from 'primevue/dropdown';
 import DynamicDialog from 'primevue/dynamicdialog';
+import ProgressBar from 'primevue/progressbar';
+import Textarea from 'primevue/textarea';
 
 
 const mainApp = createApp(App);
@@ -67,5 +69,7 @@ mainApp.component("Card", Card);
 mainApp.component("Dropdown", Dropdown);
 mainApp.component("DynamicDialog", DynamicDialog);
 mainApp.component("Panel ", Panel );
+mainApp.component("ProgressBar ", ProgressBar );
+mainApp.component("Textarea ", Textarea );
 
 mainApp.mount('#app');

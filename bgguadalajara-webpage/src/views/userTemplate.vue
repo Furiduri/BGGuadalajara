@@ -1,4 +1,5 @@
 <template>
+  <ProgressBar mode="indeterminate" style="height: .5em" v-if="isLoading" />
     <Toast />
     <Menubar :model="menuItems">
       <template #start>
@@ -40,12 +41,13 @@
       const errorMsg = computed(() => {
         return store.Error;
       });
+      const isLoading = computed(() => store.Loading);
       const CloseErrorMsg = () => {
         console.log(store.Error);
         store.Error = null;
       };
   
-      return { menuItems, errorMsg, CloseErrorMsg };
+      return { menuItems, errorMsg,isLoading, CloseErrorMsg };
     },
     components: {
       Menubar,

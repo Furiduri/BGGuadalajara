@@ -1,3 +1,4 @@
 export const DBTables = { 
-    Business: 'business'
+    Business: 'business',
+    cat_busines_lines: 'cat_busines_lines'
 }
